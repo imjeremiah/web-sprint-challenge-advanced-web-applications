@@ -2,9 +2,9 @@ import { rest } from 'msw'
 import Articles from './data'
 import credentials from './credentials';
 
-function authenticator(req, resp) {
+function authenticator(req, res) {
   const { authorization } = req.headers._headers;
-  return (authorization === credentials.token)?resp():res( ctx.status(403),ctx.json({ error: 'User not currently logged in.' }));
+  return (authorization === credentials.token)?res():res( ctx.status(403),ctx.json({ error: 'User not currently logged in.' }));
 }
 
 
