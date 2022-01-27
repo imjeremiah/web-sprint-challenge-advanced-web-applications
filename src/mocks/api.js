@@ -1,13 +1,20 @@
 const express = require('express')
 const Articles = require('./data')
-const cors = require('cors')
+// const cors = require('cors')
 const credentials = require('./credentials');
 
 const api = express()
 
 api.use(express.json())
 
-api.use(cors())
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", '*');
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 const authenticator = (req, res, next) => {
   const { authorization } = req.headers;
